@@ -17,7 +17,6 @@ kivy.require('1.0.7')
 class Photobooth(App):
     state = {
         "frame": 0,
-        "countdown": 0,
         "photopath": "/",
     }
 
