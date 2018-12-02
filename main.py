@@ -8,6 +8,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 
 from screens.photo import PhotoScreen
 from screens.start import StartScreen
+from screens.preview import PreviewScreen
 
 Config.set('graphics', 'width', '800')
 Config.set('graphics', 'height', '480')
@@ -18,6 +19,7 @@ class Photobooth(App):
     state = {
         "frame": 0,
         "photopath": "/",
+        "currentPhoto": "20181202_132921"
     }
 
     frames = [
@@ -27,8 +29,9 @@ class Photobooth(App):
 
     def build(self):
         sm = ScreenManager()
-        # sm.add_widget(StartScreen(name='start'))
+        sm.add_widget(StartScreen(name='start'))
         sm.add_widget(PhotoScreen(name='photo'))
+        sm.add_widget(PreviewScreen(name='preview'))
         return sm
 
 

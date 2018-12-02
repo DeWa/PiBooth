@@ -1,0 +1,28 @@
+#:kivy 1.0
+
+<PreviewScreen>:
+    Image:
+        id: photo
+        size: 1200, 800
+        pos: (0,0)
+    AnchorLayout:
+        anchor_x: "center"
+        anchor_y: "bottom"
+        
+        canvas:
+            Color:
+                rgb: (1, 1, 1)
+        BoxLayout:
+            orientation: "horizontal"
+            Button:
+                id: "back_button"
+                size_hint: (.15, .15)
+                pos: (700,10)
+                text: "RETAKE"
+                on_press: root.manager.current = 'photo'
+            Button:
+                id: "confirm_button"
+                size_hint: (.15, .15)
+                pos: (700,10)
+                text: "OK"
+
