@@ -17,15 +17,20 @@ Builder.load_file(os.path.join(__location__, 'photo.kv'))
 
 
 class PhotoScreen(Screen):
-    countdown = 5
     buttonLabel = "Start countdown"
-    timerStart = 0
-    timerStarted = False
     flash_opacity = NumericProperty(0)
-    countdown_started = False
     flash_animation = Animation(flash_opacity=0)
 
     def on_enter(self):
+        self.camera = self.ids['camera']
+        self.countdown = 5
+        self.buttonLabel = "Start countdown"
+        self.ids.countdown_button.text = "Start countdown"
+        self.timerStart = 0
+        self.timerStarted = False
+        self.countdown_started = False
+
+        self.camera.play = True
         self.app = App.get_running_app()
         self.update_frame()
         self.flash_animation.bind(on_complete=self.next_screen)
@@ -45,12 +50,10 @@ class PhotoScreen(Screen):
                 self.countdown_func, 1.0)
 
     def take_photo(self):
-        camera = self.ids['camera']
-
-        camera.play = False
+        self.camera.play = False
         timestr = time.strftime("%Y%m%d_%H%M%S")
         # Change this to Raspberry Pi's own camera capture when used in that
-        camera.export_to_png("./photos/IMG_{}.png".format(timestr))
+        self.camera.export_to_png("./photos/IMG_{}.png".format(timestr))
         self.app.state['currentPhoto'] = timestr
 
         self.flash_opacity = 1
