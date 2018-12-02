@@ -26,6 +26,8 @@ class PhotoScreen(Screen):
     flash_animation = Animation(flash_opacity=0)
 
     def on_enter(self):
+        self.app = App.get_running_app()
+        self.update_frame()
         self.flash_animation.bind(on_complete=self.next_screen)
 
     def countdown_func(self, dt):
@@ -49,9 +51,16 @@ class PhotoScreen(Screen):
         timestr = time.strftime("%Y%m%d_%H%M%S")
         # Change this to Raspberry Pi's own camera capture when used in that
         camera.export_to_png("./photos/IMG_{}.png".format(timestr))
+        self.app.state['currentPhoto'] = timestr
 
         self.flash_opacity = 1
         self.flash_animation.start(self)
 
     def next_screen(self, *args):
         self.manager.current = 'preview'
+
+    def get_frame_source(self):
+        return self.app.frames[self.app.state['frame']]
+
+    def update_frame(self):
+        self.ids.frame.source = self.get_frame_source()
