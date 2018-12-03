@@ -1,0 +1,40 @@
+#:kivy 1.0
+
+<ShareScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        AnchorLayout:
+            anchor_x: "center"
+            size_hint_y: 0.3
+            
+            canvas:
+                Color:
+                    rgba: 0, 0, 0, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Label:
+                text: "Thank you!"
+                valign: 'middle'
+                font_size: '20sp'
+                size_hint: (None, None)
+
+
+        BoxLayout:
+            orientation: 'horizontal'
+
+            Image:
+                id: photo
+                size: 1200, 800
+                pos: (0,0)
+
+            BoxLayout:
+                orientation: 'vertical'
+                Button:
+                    id: "back_button"
+                    text: "Email"
+                Button:
+                    id: "back_button"
+                    text: "sdad"

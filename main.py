@@ -9,6 +9,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from screens.photo import PhotoScreen
 from screens.start import StartScreen
 from screens.preview import PreviewScreen
+from screens.share import ShareScreen
 
 Config.set('graphics', 'width', '800')
 Config.set('graphics', 'height', '480')
@@ -32,6 +33,7 @@ class Photobooth(App):
         sm.add_widget(StartScreen(name='start'))
         sm.add_widget(PhotoScreen(name='photo'))
         sm.add_widget(PreviewScreen(name='preview'))
+        sm.add_widget(ShareScreen(name='share'))
         return sm
 
 
