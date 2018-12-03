@@ -1,10 +1,6 @@
 from kivy.uix.screenmanager import Screen
 from kivy.app import App
 from kivy.lang import Builder
-from kivy.loader import Loader
-from kivy.clock import Clock
-from kivy.properties import NumericProperty
-from kivy.animation import Animation
 import time
 
 
