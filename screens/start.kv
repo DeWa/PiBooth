@@ -1,19 +1,9 @@
 #:kivy 1.0
 
 <StartScreen>:
-    FloatLayout:
-        Camera:
-            id: camera
-            size: (1200, 800)
-            resolution: (1200, 800)
-            pos: (0,0)
-            play: True
-        Image:
-            id: frame
-            size_hint: None, None
-            size: 1200, 800
-            pos: (200,100)
-
+    BoxLayout:
+        orientation: "vertical"
+        
         Label:
             pos: (10,750)
             font_size: '50sp'
@@ -21,16 +11,28 @@
             id: 'Photobooth_logo'
             halign: 'center'
             text: 'PHOTOBOOTH'
-        Button:
-            size_hint: (.1, .25)
-            pos: (10,400)
-            text: '<'
-            on_press: root.prev_frame()
-        Button:
-            size_hint: (.1, .25)
-            pos: (1450,400)
-            text: '>'
-            on_press: root.next_frame()
+        BoxLayout:
+            orientation: "horizontal"
+            Button:
+                size_hint: (.1, .25)
+                pos: (10,400)
+                text: '<'
+                on_press: root.prev_frame()
+            FloatLayout:
+                Camera:
+                    id: camera
+                    size_hint: (1, 1)
+                    resolution: (1280,720)
+                    play: True
+                Image:
+                    id: frame
+                    size_hint: (1,1)
+                    pos: (0,0)
+            Button:
+                size_hint: (.1, .25)
+                pos: (1450,400)
+                text: '>'
+                on_press: root.next_frame()
         Button:
             size_hint: (.15, .15)
             pos: (700,10)
