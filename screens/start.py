@@ -16,7 +16,7 @@ class StartScreen(Screen):
         self.a = App.get_running_app()
         self.camera = self.a.camera
         self.camera.play = True
-        self.ids["camera_wrapper"].add_widget(self.camera)
+        self.ids["camera_wrapper"].add_widget(self.camera, 2)
         self.update_frame()
 
     def next_frame(self):
