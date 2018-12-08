@@ -9,7 +9,7 @@ from screens.share import ShareScreen
 from screens.preview import PreviewScreen
 from screens.start import StartScreen
 from screens.photo import PhotoScreen
-from lib.boothcamera import BoothCamera
+from library.boothcamera import BoothCamera
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.window import Window
 from kivy.config import Config
@@ -24,6 +24,7 @@ kivy.require('1.0.7')
 
 
 class Photobooth(App):
+
     state = {
         "frame": 0,
         "photopath": "/",
@@ -36,6 +37,7 @@ class Photobooth(App):
     ]
 
     def build(self):
+        self.camera = BoothCamera()
         sm = ScreenManager()
         sm.add_widget(StartScreen(name='start'))
         sm.add_widget(PhotoScreen(name='photo'))
