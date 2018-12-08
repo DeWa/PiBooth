@@ -24,8 +24,8 @@ class Photobooth(App):
     }
 
     frames = [
-        "./assets/frame1.png",
-        "./assets/frame2.png"
+        "./assets/frames/frame1.png",
+        "./assets/frames/frame2.png"
     ]
 
     def build(self):
