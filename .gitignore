@@ -129,5 +129,11 @@ dmypy.json
 pyvenv.cfg
 pip-selfcheck.json
 
+### Local changes
+# Photos
+/photos/final
+/photos/thumbnails
+/photos/screen
+/photos/original
 
 # End of https://www.gitignore.io/api/python
