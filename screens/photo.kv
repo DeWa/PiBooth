@@ -2,11 +2,25 @@
 
 <PhotoScreen>:
     FloatLayout:
-        id: camera_wrapper    
+        id: camera_wrapper  
+
+        BoxLayout:
+            id: loading_spinner
+            orientation: "vertical"
+            size_hint: (.20, .20)
+            pos: (root.width / 2.5, root.height / 2.5)
+            ProgressSpinner:
+                speed: 1.5
+                stroke_width: 2
+				color: 1, 0, 0, 1
+            Label:
+                size: self.texture_size
+                text: "PROCESSING..."
         Image:
             id: frame
             size_hint: (1,1)
             pos: (0,0)
+
         BoxLayout:
             Button:
                 id: countdown_button
@@ -14,6 +28,7 @@
                 pos: (700,10)
                 text: root.buttonLabel
                 on_press: root.start_countdown()
+
         FloatLayout:
             canvas:
                 Color:
