@@ -7,34 +7,36 @@
         Label:
             pos: (10,750)
             font_size: '50sp'
-            size_hint: (1, .25)
+            size_hint: (1, .15)
             id: 'Photobooth_logo'
             halign: 'center'
             text: 'PHOTOBOOTH'
         BoxLayout:
             orientation: "horizontal"
-            Button:
-                size_hint: (.1, .25)
-                pos: (10,400)
-                text: '<'
-                on_press: root.prev_frame()
-            FloatLayout:
-                Camera:
-                    id: camera
-                    size_hint: (1, 1)
-                    resolution: (1280,720)
-                    play: True
+            AnchorLayout:
+                size_hint: (.1, 1)
+                Button:
+                    text: '<'
+                    on_press: root.prev_frame()
+            AnchorLayout:
+                id: camera_wrapper
+                size_hint: (.8, 1)
+                anchor_x: 'center'
+                anchor_y: 'bottom'
+
                 Image:
                     id: frame
+                    size: (1280, 1920)
+                    allow_stretch: True
                     size_hint: (1,1)
-                    pos: (0,0)
+            AnchorLayout:
+                size_hint: (.1, 1)
+                Button:
+                    text: '>'
+                    on_press: root.next_frame()
+        AnchorLayout:
+            size_hint: (1, .15)
+            anchor_x: 'center'
             Button:
-                size_hint: (.1, .25)
-                pos: (1450,400)
-                text: '>'
-                on_press: root.next_frame()
-        Button:
-            size_hint: (.15, .15)
-            pos: (700,10)
-            text: 'Select'
-            on_press: root.manager.current = 'photo'
+                text: 'Select'
+                on_press: root.manager.current = 'photo'

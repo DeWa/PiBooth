@@ -5,7 +5,7 @@ from kivy.loader import Loader
 from kivy.clock import Clock
 from kivy.properties import NumericProperty
 from kivy.animation import Animation
-
+from kivy.uix.camera import Camera
 
 import os
 import time
@@ -22,7 +22,6 @@ class PhotoScreen(Screen):
     flash_animation = Animation(flash_opacity=0)
 
     def on_enter(self):
-        self.camera = self.ids['camera']
         self.countdown = 5
         self.buttonLabel = "Start countdown"
         self.ids.countdown_button.text = "Start countdown"
@@ -30,8 +29,12 @@ class PhotoScreen(Screen):
         self.timerStarted = False
         self.countdown_started = False
 
-        self.camera.play = True
         self.app = App.get_running_app()
+        self.camera = self.app.camera
+        self.camera.play = True
+
+        self.ids["camera_wrapper"].add_widget(self.camera, 3)
+
         self.update_frame()
         self.flash_animation.bind(on_complete=self.next_screen)
 
@@ -51,9 +54,11 @@ class PhotoScreen(Screen):
 
     def take_photo(self):
         self.camera.play = False
+        self.ids["camera_wrapper"].remove_widget(self.camera)
         timestr = time.strftime("%Y%m%d_%H%M%S")
         # Change this to Raspberry Pi's own camera capture when used in that
-        self.camera.export_to_png("./photos/IMG_{}.png".format(timestr))
+        path = "./photos/IMG_{}.png".format(timestr)
+        self.camera.take_picture(path)
         self.app.state['currentPhoto'] = timestr
 
         self.flash_opacity = 1
@@ -67,3 +72,6 @@ class PhotoScreen(Screen):
 
     def update_frame(self):
         self.ids.frame.source = self.get_frame_source()
+
+    def on_pre_leave(self):
+        self.ids["camera_wrapper"].remove_widget(self.camera)

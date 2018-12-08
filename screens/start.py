@@ -2,6 +2,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.loader import Loader
+from kivy.uix.camera import Camera
 import os
 
 __location__ = os.path.realpath(
@@ -13,6 +14,9 @@ Builder.load_file(os.path.join(__location__, 'start.kv'))
 class StartScreen(Screen):
     def on_enter(self):
         self.a = App.get_running_app()
+        self.camera = self.a.camera
+        self.camera.play = True
+        self.ids["camera_wrapper"].add_widget(self.camera)
         self.update_frame()
 
     def next_frame(self):
@@ -42,3 +46,6 @@ class StartScreen(Screen):
 
     def update_frame(self):
         self.ids.frame.source = self.get_frame_source()
+
+    def on_pre_leave(self):
+        self.ids["camera_wrapper"].remove_widget(self.camera)
