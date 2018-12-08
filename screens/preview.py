@@ -16,4 +16,4 @@ Builder.load_file(os.path.join(__location__, 'preview.kv'))
 class PreviewScreen(Screen):
     def on_enter(self):
         self.app = App.get_running_app()
-        self.ids.photo.source = "./photos/IMG_%s.png" % self.app.state['currentPhoto']
+        self.ids.photo.source = "./photos/screen/%s.png" % self.app.state['currentPhoto']
