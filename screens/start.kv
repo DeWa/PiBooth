@@ -18,12 +18,17 @@
             id: 'Photobooth_logo'
             halign: 'center'
             text: 'PHOTOBOOTH'
+            font_name: 'fredoka'
+            outline_color: [0,0,0]
+            outline_width: 2
         BoxLayout:
             orientation: "horizontal"
             AnchorLayout:
-                size_hint: (.1, 1)
+                size_hint: (.2, 1)
                 Button:
-                    text: '<'
+                    background_normal:'assets/images/left-arrow.png'
+                    background_down: 'assets/images/left-arrow-pressed.png'
+                    source:'assets/images/right-arrow.png'
                     on_press: root.prev_frame()
             AnchorLayout:
                 id: camera_wrapper
@@ -37,13 +42,18 @@
                     allow_stretch: True
                     size_hint: (1,1)
             AnchorLayout:
-                size_hint: (.1, 1)
+                size_hint: (.2, 1)
                 Button:
-                    text: '>'
+                    background_normal:'assets/images/right-arrow.png'
+                    background_down: 'assets/images/right-arrow-pressed.png'
                     on_press: root.next_frame()
+
         AnchorLayout:
             size_hint: (1, .15)
             anchor_x: 'center'
             Button:
                 text: 'Select'
                 on_press: root.manager.current = 'photo'
+                font_name: 'fredoka'
+                font_size: '25sp'
+                background_color: 0, 1, 0.77, 1 
