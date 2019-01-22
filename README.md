@@ -36,6 +36,8 @@ Install Raspberry Pi Camera dependencies
 sudo apt-get install python-gst0.10 gstreamer0.10-plugins-good gstreamer0.10-plugins-ugly
 ```
 
+You also need 'Fredoka' font which can be found from [Google fonts](https://fonts.google.com/specimen/Fredoka+One). 
+
 ## Usage
 
 Change configs if needed at ``photobooth.ini``
