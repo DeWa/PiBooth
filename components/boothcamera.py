@@ -1,4 +1,4 @@
-from library.vendor.camerauix import Camera
+from vendor.camerauix import Camera
 
 class BoothCamera(Camera):
     def __init__(self):
