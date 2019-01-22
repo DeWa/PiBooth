@@ -1,9 +1,16 @@
 #:kivy 1.0
 
 <PhotoScreen>:
-    FloatLayout:
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'assets/images/background.png'
+    
+    AnchorLayout:
         id: camera_wrapper  
-
         BoxLayout:
             id: loading_spinner
             orientation: "vertical"
@@ -16,19 +23,36 @@
             Label:
                 size: self.texture_size
                 text: "PROCESSING..."
+                font_name: 'fredoka'
+                font_size: '25sp'
         Image:
             id: frame
             size_hint: (1,1)
             pos: (0,0)
-
+            
         BoxLayout:
             Button:
                 id: countdown_button
                 size_hint: (.15, .15)
                 pos: (700,10)
-                text: root.buttonLabel
+                text: "Start countdown"
+                font_name: 'fredoka'
+                font_size: '25sp'
+                background_color: 0, 1, 0.77, 0.5
                 on_press: root.start_countdown()
-
+        
+        AnchorLayout:
+            anchor_x: "left"
+            anchor_y: "top"
+            Button:
+                background_normal:'assets/images/back-arrow.png'
+                background_down: 'assets/images/back-arrow.png'
+                id: back_button
+                size_hint: (.15, .25)
+                pos: (700,10)
+                on_press:
+                    root.manager.transition.direction = 'right' 
+                    root.manager.current = 'start'
         FloatLayout:
             canvas:
                 Color:
@@ -37,3 +61,9 @@
                 Rectangle:
                     pos: 0, 0
                     size: (root.width, root. height)
+            Label:
+                id: countdown_label
+                text: str(root.countdown)
+                font_name: 'fredoka'
+                font_size: '100sp'
+                color: 1,1,1,0.5
