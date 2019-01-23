@@ -5,18 +5,19 @@ import os
 os.environ['KIVY_GL_BACKEND'] = 'gl'
 import kivy
 
-from screens.share import ShareScreen
-from screens.preview import PreviewScreen
-from screens.start import StartScreen
-from screens.photo import PhotoScreen
-from library.boothcamera import BoothCamera
-from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.screenmanager import ScreenManager, Screen, SwapTransition 
 from kivy.core.window import Window
 from kivy.config import Config
 from kivy.lang import Builder
 from kivy.app import App
 
 
+from screens.share import ShareScreen
+from screens.preview import PreviewScreen
+from screens.start import StartScreen
+from screens.photo import PhotoScreen
+from components.boothcamera import BoothCamera
+from utils.state import State
 
 Config.set('graphics', 'width', '800')
 Config.set('graphics', 'height', '480')
@@ -38,7 +39,7 @@ class Photobooth(App):
 
     def build(self):
         self.camera = BoothCamera()
-        sm = ScreenManager()
+        sm = ScreenManager(transition=SwapTransition())
         sm.add_widget(StartScreen(name='start'))
         sm.add_widget(PhotoScreen(name='photo'))
         sm.add_widget(PreviewScreen(name='preview'))
