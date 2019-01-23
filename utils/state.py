@@ -20,7 +20,7 @@ class State:
 
   @staticmethod
   def set(value):
-    State.state[value[0]] = [1]
+    State.state[value[0]] = value[1]
     return State.state
   
   @staticmethod
@@ -31,7 +31,7 @@ class State:
   @staticmethod
   def get(key):
     try:
-      return State.state[key]
+      return State.state.get(key)
     except KeyError:
       print("No key found")
       return None
