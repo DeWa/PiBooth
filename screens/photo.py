@@ -6,8 +6,10 @@ from kivy.clock import Clock
 from kivy.properties import NumericProperty
 from kivy.animation import Animation
 from kivy.uix.camera import Camera
+
 from components.progress import ProgressSpinner
 from utils.imageutil import PreviewThread, make_preview
+from utils.state import State
 
 import os
 import time
@@ -26,7 +28,7 @@ class PhotoScreen(Screen):
     countdown = NumericProperty(0)
 
     def on_enter(self):
-        self.countdown = 5
+        self.countdown = State.get('photo_countdown')
         self.timerStart = 0
         self.timerStarted = False
         self.countdown_started = False
@@ -81,7 +83,7 @@ class PhotoScreen(Screen):
         timestr = time.strftime("%Y%m%d_%H%M%S")
         path = "./photos/original/{}".format(timestr)
         self.camera.take_picture(path)
-        self.app.state['currentPhoto'] = timestr
+        State.set(('currentPhoto', timestr))
 
         # Add loading spinner
         self.flash_opacity = 1
@@ -101,7 +103,8 @@ class PhotoScreen(Screen):
         self.manager.current = 'preview'
 
     def get_frame_source(self):
-        return self.app.frames[self.app.state['frame']]
+        frames = State.get('lowres_frames')
+        return frames[State.get('frame')]
 
     def update_frame(self):
         self.ids.frame.source = self.get_frame_source()

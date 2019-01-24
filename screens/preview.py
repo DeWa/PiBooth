@@ -1,6 +1,9 @@
 from kivy.uix.screenmanager import Screen
 from kivy.app import App
 from kivy.lang import Builder
+
+from utils.state import State
+
 import time
 
 
@@ -16,4 +19,4 @@ Builder.load_file(os.path.join(__location__, 'preview.kv'))
 class PreviewScreen(Screen):
     def on_enter(self):
         self.app = App.get_running_app()
-        self.ids.photo.source = "./photos/screen/%s.png" % self.app.state['currentPhoto']
+        self.ids.photo.source = "%s/screen/%s.png" % (State.get('photopath'), State.get('currentPhoto'))
