@@ -15,7 +15,6 @@ Builder.load_file(os.path.join(__location__, 'start.kv'))
 
 class StartScreen(Screen):
     def on_enter(self):
-        State.print()
         self.a = App.get_running_app()
         self.camera = self.a.camera
         self.camera.play = True
@@ -40,7 +39,6 @@ class StartScreen(Screen):
 
         if next_frame_number < 0:
             State.set(('frame', len(self.frames) - 1))
-            State.print()
         else:
             State.set(('frame', next_frame_number))
 
