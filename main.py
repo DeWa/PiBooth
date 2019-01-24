@@ -48,6 +48,7 @@ class Photobooth(App):
             "upload_url": "https://dont.use.change/me",
             "photo_url": "https://get.photo.here/"
         })
+        config.read('photobooth.ini')
         State.set_dict({
             "lowres_frames": None,
             "highres_frames": None,
