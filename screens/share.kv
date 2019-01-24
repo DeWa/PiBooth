@@ -1,40 +1,66 @@
 #:kivy 1.0
 
 <ShareScreen>:
+    canvas.before:  
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'assets/images/background.png'
     BoxLayout:
         orientation: 'vertical'
 
         AnchorLayout:
             anchor_x: "center"
             size_hint_y: 0.3
-            
-            canvas:
+
+            Label:
+                size_hint: (1,None)
+                text: "You can find your picture at the url below:"
+                valign: 'middle'
+                font_size: '25sp'
+                font_name: 'fredoka'
+                outline_color: [0,0,0]
+                outline_width: 2
+        AnchorLayout:
+            size_hint_y: 0.2
+            canvas.before:  
                 Color:
-                    rgba: 0, 0, 0, 1
+                    rgba: 1, 1, 1, 1
                 Rectangle:
                     pos: self.pos
                     size: self.size
+                Color:
+                    rgba: 0, 0, 0, 1
+                Line:
+                    width: 2
+                    rectangle: self.x, self.y, self.width, self.height
 
             Label:
-                text: "Thank you!"
+                text: root.imageurl
                 valign: 'middle'
-                font_size: '20sp'
-                size_hint: (None, None)
+                font_size: '30sp'
+                font_name: 'fredoka'
+                outline_color: [0,0,0]
+                outline_width: 2
 
+        AnchorLayout:
+            anchor_x: "center"
+            size_hint_y: 0.3
 
-        BoxLayout:
-            orientation: 'horizontal'
-
-            Image:
-                id: photo
-                size: 1200, 800
-                pos: (0,0)
-
-            BoxLayout:
-                orientation: 'vertical'
-                Button:
-                    id: "back_button"
-                    text: "Email"
-                Button:
-                    id: "back_button"
-                    text: "sdad"
+            Label:
+                size_hint: (1,None)
+                text: "Or you can scan this QR-code"
+                valign: 'middle'
+                font_size: '25sp'
+                font_name: 'fredoka'
+                outline_color: [0,0,0]
+                outline_width: 2
+        AnchorLayout:
+            anchor_x: "center"
+            
+            QRCodeWidget:
+                size_hint_x: 0.3
+                id: qr
+                data: root.imageurl
