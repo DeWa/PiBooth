@@ -61,7 +61,7 @@ class PhotoScreen(Screen):
         if self.countdown_started is not True:
             self.countdown_started = True
             self.countdown_interval = Clock.schedule_interval(
-                self.countdown_func, 1.0)
+                self.countdown_func, 1)
 
         self.ids["countdown_label"].opacity = 1
         # Hide buttons
