@@ -32,4 +32,8 @@ class ShareScreen(Screen):
             self.reset_app, State.get('reset_time'))
 
     def reset_app(self, dt):
+        Clock.unschedule(self.reset_timer)
         self.manager.current = 'start'
+
+    def on_leave(self):
+        Clock.unschedule(self.reset_timer)
