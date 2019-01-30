@@ -40,12 +40,32 @@ You also need 'Fredoka' font which can be found from [Google fonts](https://font
 
 ## Usage
 
-Change configs if needed at ``photobooth.ini``
+1. Change configs if needed at ``photobooth.ini``
+2. Add Frames
 
-Start UI
+   Add two set of frames: highres (resolution 3280x2464) and lowres (resolution 640x480).
+   Lowres frames are used in the livevideo and previews whereas highres are used when creating the final photos.
+   Copy highres frames to  ``./assets/frames`` folder and lowres counterparts (with the same name) to ``./assets/frames/lowres`` 
+
+3. Start UI
+   ```
+   python3 main.py
+   ```
+
+4. Start UI at the startup
+   
+   ***TODO***
+
+## Troubleshooting
+  - *Photobooth gives me ``Segmentation fault`` at the startup*
+
+You have probably imported the libraries at the wrong order in main.py. The right order is
 ```
-python3 main.py
+import os, glob
+os.environ['KIVY_GL_BACKEND'] = 'gl'
+import kivy
 ```
+This will be fixed in the future.
 
 ## License
 MIT
