@@ -60,7 +60,8 @@ class Photobooth(App):
             "photo_countdown": config.get('photobooth', 'photo_countdown'),
             "reset_time": float(config.get('photobooth', 'reset_time')),
             "upload_url": config.get('photobooth', 'upload_url'),
-            "photo_url": config.get('photobooth', 'photo_url')
+            "photo_url": config.get('photobooth', 'photo_url'),
+            "api_key": config.get('photobooth', 'api_key')
         })
 
     def init_frames(self):
