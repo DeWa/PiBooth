@@ -26,7 +26,7 @@ class ShareScreen(Screen):
 
     def on_enter(self):
         self.app = App.get_running_app()
-        self.sharecode = create_share_code()
+        self.sharecode = State.get('share_code')
         self.imageurl = '%s%s' % (State.get('photo_url'), self.sharecode)
         self.reset_timer = Clock.schedule_interval(
             self.reset_app, State.get('reset_time'))
