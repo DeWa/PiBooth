@@ -27,6 +27,6 @@ def send_image_to_api(image_path, image_name, sharecode):
     response = requests.post("%s/%s" % (upload_url, sharecode), headers=headers, files=files)
 
 def send_image_to_s3(image_path, sharecode):
-  bucket_name = 'pibooth'
+  bucket_name = State.get("s3_bucket_name")
   s3.upload_file(image_path, bucket_name, sharecode + '.jpg')
   

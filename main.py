@@ -61,7 +61,8 @@ class Photobooth(App):
             "reset_time": float(config.get('photobooth', 'reset_time')),
             "upload_url": config.get('photobooth', 'upload_url'),
             "photo_url": config.get('photobooth', 'photo_url'),
-            "api_key": config.get('photobooth', 'api_key')
+            "api_key": config.get('photobooth', 'api_key'),
+            "s3_bucket_name": config.get('photobooth', 's3_bucket_name')
         })
 
     def init_frames(self):
