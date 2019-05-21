@@ -31,7 +31,7 @@ class PreviewScreen(Screen):
         current_photo = State.get('currentPhoto')
 
         photo_thread = CreateFinalAndSendThread(
-            1, "Thread-1", current_photo, self.get_frame_source())
+            1, "Thread-1", current_photo, self.get_frame_source(), sharecode)
         photo_thread.start()
         self.manager.current = 'share'
 

@@ -2,7 +2,8 @@ import PIL
 import threading
 import time
 from PIL import Image
-from utils.httputils import send_image_to_api
+#from utils.httputils import send_image_to_api
+from utils.httputils import send_image_to_s3
 from utils.state import State
 
 
@@ -37,7 +38,8 @@ def make_final(photo_name, frame_source):
     img = Image.open("%s/original/%s.jpg" %
                      (image_path, photo_name)).convert('RGBA')
     framedImages = add_frames(img, frame_source)
-    framedImages.save("%s/final/%s.png" % (image_path, photo_name))
+    jpgImage = framedImages.convert('RGB')
+    jpgImage.save("%s/final/%s.jpg" % (image_path, photo_name), quality=95)
 
 
 class PreviewThread(threading.Thread):
@@ -57,15 +59,15 @@ class PreviewThread(threading.Thread):
 
 
 class CreateFinalAndSendThread(threading.Thread):
-    def __init__(self, threadID, name, photo_name, frame_source):
+    def __init__(self, threadID, name, photo_name, frame_source, sharecode):
         threading.Thread.__init__(self)
         self.threadID = threadID
         self.name = name
         self.photo_name = photo_name
         self.frame_source = frame_source
         photo_path = State.get("photopath")
-        self.image_path = "%s/final/%s.png" % (photo_path, photo_name)
-        self.sharecode = State.get('share_code')
+        self.image_path = "%s/final/%s.jpg" % (photo_path, photo_name)
+        self.sharecode = sharecode
 
     def run(self):
         print("Starting thread %s and creating final photo for %s" %
@@ -73,6 +75,6 @@ class CreateFinalAndSendThread(threading.Thread):
         make_final(self.photo_name, self.frame_source)
 
         print("Photo created! Sending to API")
-        send_image_to_api(
-            self.image_path, self.photo_name + ".png", self.sharecode)
+        send_image_to_s3(
+            self.image_path, self.sharecode)
         print("Exiting " + self.name)
